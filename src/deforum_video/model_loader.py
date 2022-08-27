@@ -1,8 +1,8 @@
 import torch
+from ldm.util import instantiate_from_config
 
 # this should already see sys.path.append('./k-diffusion')
 
-from ldm.util import instantiate_from_config
 
 __all__ = ["load_model_from_config"]
 

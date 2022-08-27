@@ -132,7 +132,9 @@ def render_animation(args, anim_args, model):
             print(f"Using video init frame {init_frame}")
             args.init_image = init_frame
         # sample the diffusion model
-        results = generate(args=args, model=model, return_latent=False, return_sample=True)
+        results = generate(
+            args=args, model=model, return_latent=False, return_sample=True
+        )
         sample, image = results[0], results[1]
         filename = f"{args.timestring}_{frame_idx:05}.png"
         image.save(os.path.join(args.outdir, filename))
@@ -154,7 +156,7 @@ def render_input_video(args, anim_args, model):
     try:
         for f in Path(video_in_frame_path).glob("*.jpg"):
             f.unlink()
-    except:
+    except BaseException:
         pass
     subprocess.run(
         [

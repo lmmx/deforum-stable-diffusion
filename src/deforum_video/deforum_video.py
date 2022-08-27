@@ -1,7 +1,6 @@
 import os
 import random
 import shutil
-import subprocess
 import time
 
 import torch

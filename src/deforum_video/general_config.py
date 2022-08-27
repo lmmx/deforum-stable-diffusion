@@ -6,7 +6,7 @@ from modelling import get_output_folder
 __all__ = ["resize_side", "DeforumArgs", "general_args"]
 
 
-batch_name="StableFun",
+batch_name = "StableFun"
 models_path = "./content/models"
 output_path = "./content/output"
 os.makedirs(models_path, exist_ok=True)
