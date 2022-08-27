@@ -128,7 +128,7 @@ def make_callback(sampler, dynamic_threshold=None, static_threshold=None):
     return callback
 
 
-def generate(args, return_latent=False, return_sample=False):
+def generate(args, model, return_latent=False, return_sample=False):
     seed_everything(args.seed)
     os.makedirs(args.outdir, exist_ok=True)
 

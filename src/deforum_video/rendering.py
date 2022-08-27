@@ -25,7 +25,7 @@ __all__ = ["render_image_batch", "render_animation", "render_input_video"]
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 
-def render_image_batch(args):
+def render_image_batch(args, model):
     # create output folder for the batch
     os.makedirs(args.outdir, exist_ok=True)
     if args.save_settings or args.save_samples:
@@ -40,7 +40,7 @@ def render_image_batch(args):
         print(f"Batch {batch_index+1} of {args.n_batch}")
         for prompt in prompts:
             args.prompt = prompt
-            results = generate(args)
+            results = generate(args=args, model=model)
             for image in results:
                 if args.save_samples:
                     filename = f"{args.timestring}_{index:05}_{args.seed}.png"
@@ -51,7 +51,7 @@ def render_image_batch(args):
             args.seed = next_seed(args)
 
 
-def render_animation(args, anim_args):
+def render_animation(args, anim_args, model):
     if anim_args.key_frames:
         angle_series = get_inbetweens(parse_key_frames(anim_args.angle))
         zoom_series = get_inbetweens(parse_key_frames(anim_args.zoom))
@@ -132,7 +132,7 @@ def render_animation(args, anim_args):
             print(f"Using video init frame {init_frame}")
             args.init_image = init_frame
         # sample the diffusion model
-        results = generate(args, return_latent=False, return_sample=True)
+        results = generate(args=args, model=model, return_latent=False, return_sample=True)
         sample, image = results[0], results[1]
         filename = f"{args.timestring}_{frame_idx:05}.png"
         image.save(os.path.join(args.outdir, filename))
@@ -143,7 +143,7 @@ def render_animation(args, anim_args):
         args.seed = next_seed(args)
 
 
-def render_input_video(args, anim_args):
+def render_input_video(args, anim_args, model):
     # create a folder for the video input frames to live in
     video_in_frame_path = os.path.join(args.outdir, "inputframes")
     os.makedirs(os.path.join(args.outdir, video_in_frame_path), exist_ok=True)
@@ -174,4 +174,4 @@ def render_input_video(args, anim_args):
     print(
         f"Loading {anim_args.max_frames} input frames from {video_in_frame_path} and saving video frames to {args.outdir}"
     )
-    render_animation(args, anim_args)
+    render_animation(args=args, anim_args=anim_args, model=model)

@@ -87,11 +87,11 @@ if args.sampler != "ddim":
     args.ddim_eta = 0
 
 if anim_args.animation_mode == "2D":
-    render_animation(args=args, anim_args=anim_args)
+    render_animation(args=args, anim_args=anim_args, model=model)
 elif anim_args.animation_mode == "Video Input":
-    render_input_video(args, anim_args)
+    render_input_video(args=args, anim_args=anim_args, model=model)
 else:
-    render_image_batch(args)
+    render_image_batch(args=args, model=model)
 
 skip_video_for_run_all = True
 fps = 12
