@@ -10,15 +10,15 @@ from omegaconf import OmegaConf
 from anim_config import anim_args
 from env_config import report_env
 from general_config import general_args as args
+from general_config import models_path
 from model_hash import check_model_hash
 from model_loader import load_model_from_config
 from rendering import render_animation, render_image_batch, render_input_video
 from video_gen import generate_video
 
-report_env()
+report_env(setup_environment=False)
 
 print("Local Path Variables:\n")
-
 model_config = "v1-inference.yaml"
 model_checkpoint = "sd-v1-4.ckpt"
 custom_config_path = ""
