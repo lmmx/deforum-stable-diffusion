@@ -9,7 +9,7 @@ from omegaconf import OmegaConf
 from anim_config import anim_args
 from env_config import report_env
 from general_config import general_args as args
-from general_config import models_path
+from general_config import make_models_and_output_dirs, models_path
 from model_hash import check_model_hash
 from model_loader import load_model_from_config
 from rendering import render_animation, render_image_batch, render_input_video
@@ -18,6 +18,7 @@ from video_gen import generate_video
 report_env(setup_environment=False)
 
 print("Local Path Variables:\n")
+make_models_and_output_dirs()
 model_config = "v1-inference.yaml"
 model_checkpoint = "sd-v1-4.ckpt"
 custom_config_path = ""
@@ -29,17 +30,17 @@ if os.path.exists(model_config_path := (models_path + "/" + model_config)):
     print(f"{model_config_path=} exists")
 else:
     print(
-        "cp ./stable-diffusion/configs/stable-diffusion/v1-inference.yaml $models_path/."
+        f"cp ./stable-diffusion/configs/stable-diffusion/{model_config} $models_path/."
     )
     shutil.copy(
-        "./stable-diffusion/configs/stable-diffusion/v1-inference.yaml", models_path
+        f"./stable-diffusion/configs/stable-diffusion/{model_config}", models_path
     )
 
 # checkpoint path or download
-if os.path.exists(models_path + "/" + model_checkpoint):
-    print(f"{models_path+'/'+model_checkpoint} exists")
+if os.path.exists(model_ckpt_path := (models_path + "/" + model_checkpoint)):
+    print(f"{model_ckpt_path=} exists")
 else:
-    print(f"download model checkpoint and place in {models_path+'/'+model_checkpoint}")
+    print(f"download model checkpoint and place in {model_ckpt_path=}")
     # download_model(models_path=models_path, model_checkpoint=model_checkpoint)
 
 if check_sha256:

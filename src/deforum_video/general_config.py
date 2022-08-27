@@ -3,15 +3,17 @@ from types import SimpleNamespace
 
 from modelling import get_output_folder
 
-__all__ = ["resize_side", "DeforumArgs", "general_args"]
+__all__ = ["make_models_and_output_dirs", "resize_side", "DeforumArgs", "general_args"]
 
 
 batch_name = "StableFun"
 models_path = "./content/models"
 output_path = "./content/output"
-os.makedirs(models_path, exist_ok=True)
-os.makedirs(output_path, exist_ok=True)
-print(f"{models_path=}\n{output_path=}")
+
+def make_models_and_output_dirs():
+    os.makedirs(models_path, exist_ok=True)
+    os.makedirs(output_path, exist_ok=True)
+    print(f"{models_path=}\n{output_path=}")
 
 
 def resize_side(side):
