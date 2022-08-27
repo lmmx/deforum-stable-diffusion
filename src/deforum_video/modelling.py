@@ -9,20 +9,22 @@ import requests
 import torch
 import torch.nn as nn
 from einops import rearrange, repeat
+from k_diffusion import sampling
+from k_diffusion.external import CompVisDenoiser
+from ldm.models.diffusion.ddim import DDIMSampler
+from ldm.models.diffusion.plms import PLMSSampler
 from PIL import Image
 from pytorch_lightning import seed_everything
 from skimage.exposure import match_histograms
 from torch import autocast
 
-sys.path.append("./src/taming-transformers")
-sys.path.append("./src/clip")
-sys.path.append("./stable-diffusion/")
-sys.path.append("./k-diffusion")
+# The following lines were in the notebook to allow k_diffusion and ldm to be imported
+# from without installing them (unclear why they weren't installed in editable mode)
+# sys.path.append("./src/taming-transformers")
+# sys.path.append("./src/clip")
+# sys.path.append("./stable-diffusion/")
+# sys.path.append("./k-diffusion")
 
-from k_diffusion import sampling
-from k_diffusion.external import CompVisDenoiser
-from ldm.models.diffusion.ddim import DDIMSampler
-from ldm.models.diffusion.plms import PLMSSampler
 
 __all__ = [
     "CFGDenoiser",

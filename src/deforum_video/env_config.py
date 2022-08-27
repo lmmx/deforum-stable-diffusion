@@ -1,11 +1,21 @@
 import subprocess
 
-__all__ = ["setup_env"]
+__all__ = ["report_env", "setup_env"]
 
 
-def setup_env():
+def report_env(setup_environment=False):
+    sub_p_res = subprocess.run(
+        "nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader".split(),
+        capture_output=True,
+    ).stdout.decode()
+    print(sub_p_res)
+    if setup_environment:
+        setup_env()
+
+
+def setup_env(print_subprocess=False):
+    """It's better to do this following the guide in `CONDA_SETUP.md`"""
     print("...setting up environment")
-    print_subprocess = False
     all_process = [
         [
             *"pip install".split(),

@@ -12,3 +12,8 @@ version.py
 .eggs
 .cache
 .pytest_cache/
+
+taming-transformers/
+stable-diffusion/
+latent-diffusion/
+k-diffusion/

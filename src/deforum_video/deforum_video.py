@@ -8,25 +8,16 @@ import torch
 from omegaconf import OmegaConf
 
 from anim_config import anim_args
-from env_config import setup_env
+from env_config import report_env
 from general_config import general_args as args
 from model_hash import check_model_hash
 from model_loader import load_model_from_config
 from rendering import render_animation, render_image_batch, render_input_video
 from video_gen import generate_video
 
-sub_p_res = subprocess.run(
-    "nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader".split(),
-    capture_output=True,
-).stdout.decode()
-print(sub_p_res)
+report_env()
 
 print("Local Path Variables:\n")
-
-setup_environment = False
-
-if setup_environment:
-    setup_env()
 
 model_config = "v1-inference.yaml"
 model_checkpoint = "sd-v1-4.ckpt"
