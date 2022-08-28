@@ -33,13 +33,13 @@ def main(
     make_models_and_output_dirs()
     sd_config_dir = local_deforum_sd / "configs" / "stable-diffusion"
     # config path
-    if os.path.exists(model_config_path := (models_path + "/" + model_config)):
+    if (model_config_path := (models_path / model_config)).exists():
         print(f"{model_config_path=} exists")
     else:
         print(f"cp {sd_config_dir}/{model_config} $models_path/.")
         shutil.copy(f"{sd_config_dir}/{model_config}", models_path)
     # checkpoint path or download
-    if os.path.exists(model_ckpt_path := (models_path + "/" + model_checkpoint)):
+    if (model_ckpt_path := (models_path + "/" + model_checkpoint)).exists():
         print(f"{model_ckpt_path=} exists")
     else:
         print(f"download model checkpoint and place in {model_ckpt_path=}")
