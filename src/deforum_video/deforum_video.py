@@ -3,6 +3,7 @@ import shutil
 from omegaconf import OmegaConf
 
 from anim_config import anim_args, process_anim_args
+from downloading import download_model
 from env_config import report_env
 from general_config import general_args as args
 from general_config import (
@@ -38,11 +39,16 @@ def main(
         print(f"cp {sd_config_dir}/{model_config} $models_path/.")
         shutil.copy(f"{sd_config_dir}/{model_config}", models_path)
     # checkpoint path or download
-    if (model_ckpt_path := (models_path + "/" + model_checkpoint)).exists():
+    if (model_ckpt_path := (models_path / model_checkpoint)).exists():
         print(f"{model_ckpt_path=} exists")
     else:
-        print(f"download model checkpoint and place in {model_ckpt_path=}")
+        v14url = "https://huggingface.co/CompVis/stable-diffusion-v-1-4-original"
+        print(
+            f"Download model checkpoint and place in {model_ckpt_path=}.\n"
+            f" E.g. for v1.4 go accept T&Cs at {v14url}"
+        )
         # download_model(models_path=models_path, model_checkpoint=model_checkpoint)
+        raise ValueError("STOP!")
     if check_sha256:
         check_model_hash(models_path, model_checkpoint)
     config = custom_config_path if model_config == "custom" else model_config_path
@@ -58,3 +64,7 @@ def main(
         args=args, anim_args=anim_args, model=model, skip_video=skip_video, fps=fps
     )
     return
+
+
+if __name__ == "__main__":
+    main()

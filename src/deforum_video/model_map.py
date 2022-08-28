@@ -2,7 +2,8 @@ __all__ = ["model_map"]
 
 model_map = {
     "sd-v1-4.ckpt": {
-        "sha256": "fe4efff1e174c627256e44ec2991ba279b3816e364b49f9be2abc0b3ff3f8556"
+        "link": "https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt",
+        "sha256": "fe4efff1e174c627256e44ec2991ba279b3816e364b49f9be2abc0b3ff3f8556",
     },
     "sd-v1-3-full-ema.ckpt": {
         "sha256": "54632c6e8a36eecae65e36cb0595fab314e1a1545a65209f24fde221a8d4b2ca"

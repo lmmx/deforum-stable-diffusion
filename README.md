@@ -32,3 +32,11 @@ pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg
 pip install -e git+https://github.com/deforum/stable-diffusion@main#egg=latent-diffusion
 pip install -e git+https://github.com/deforum/k-diffusion@master#egg=k-diffusion
 ```
+
+When you run the code, it'll tell you to 
+
+To download the weights, you need to accept their T&Cs, e.g. for v1.4 go here
+
+- https://huggingface.co/CompVis/stable-diffusion-v-1-4-original
+
+(This can be made less awkward by uncommenting the `download_model` function)
