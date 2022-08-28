@@ -3,12 +3,13 @@ from types import SimpleNamespace
 
 from modelling import get_output_folder
 
-__all__ = ["make_models_and_output_dirs", "resize_side", "DeforumArgs", "general_args"]
+__all__ = ["make_models_and_output_dirs", "resize_side", "process_args", "DeforumArgs", "general_args"]
 
 
 batch_name = "StableFun"
 models_path = "./content/models"
 output_path = "./content/output"
+
 
 def make_models_and_output_dirs():
     os.makedirs(models_path, exist_ok=True)
@@ -19,6 +20,24 @@ def make_models_and_output_dirs():
 def resize_side(side):
     """Resize to integer multiple of 64"""
     return side - side % 64
+
+
+def process_args(args, anim_args):
+    args.timestring = time.strftime("%Y%m%d%H%M%S")
+    args.strength = max(0.0, min(1.0, args.strength))
+    if args.seed == -1:
+        args.seed = random.randint(0, 2 ** 32)
+    if anim_args.animation_mode == "Video Input":
+        args.use_init = True
+    if not args.use_init:
+        args.init_image = None
+        args.strength = 0
+    if args.sampler == "plms" and (args.use_init or anim_args.animation_mode != "None"):
+        print("Init images aren't supported with PLMS yet, switching to KLMS")
+        args.sampler = "klms"
+    if args.sampler != "ddim":
+        args.ddim_eta = 0
+    return
 
 
 DeforumArgs = dict(

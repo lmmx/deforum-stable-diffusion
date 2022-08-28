@@ -20,7 +20,7 @@ from modelling import (
 from prompts import animation_prompts, prompts
 from seeding import next_seed
 
-__all__ = ["render_image_batch", "render_animation", "render_input_video"]
+__all__ = ["device", "render_image_batch", "render_animation", "render_input_video"]
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
