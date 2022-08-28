@@ -5,7 +5,9 @@ __all__ = ["report_env", "setup_env"]
 
 def report_env(setup_environment=False):
     sub_p_res = subprocess.run(
-        "nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader".split(),
+        """
+        nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader
+        """.split(),
         capture_output=True,
     ).stdout.decode()
     print(sub_p_res)
@@ -14,7 +16,10 @@ def report_env(setup_environment=False):
 
 
 def setup_env(print_subprocess=False):
-    """It's better to do this following the guide in `CONDA_SETUP.md`"""
+    """
+    For reference only: incompatible with this library after rewriting from the
+    notebook. Follow the guide in `CONDA_SETUP.md`
+    """
     print("...setting up environment")
     all_process = [
         [

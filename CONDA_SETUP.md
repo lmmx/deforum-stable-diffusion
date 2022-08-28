@@ -45,6 +45,8 @@ The internal name is `ldm` (as in, the code calls `import from ldm.models... imp
 With this in mind, to recreate an environment:
 
 ```sh
+git clone https://github.com/lmmx/deforum-stable-diffusion
+cd deforum-stable-diffusion
 conda create -n deforum
 conda activate deforum
 conda install -y pytorch torchvision torchaudio torchtext cudatoolkit=11.6 pytorch-lightning -c pytorch -c conda-forge
@@ -53,6 +55,9 @@ pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg
 pip install -e git+https://github.com/deforum/stable-diffusion@main#egg=latent-diffusion
 pip install -e git+https://github.com/deforum/k-diffusion@master#egg=k-diffusion
 ```
+
+- Note that it's important to `cd` into the package after you clone it so that `pip install -e git+https://...`
+  will put packages into `src/` of this repo, where it can detect the config files (not accessible via Python namespaces).
 
 Having done this, I've turned off the `subprocess` approach to installation in the code
 (`report_env()` takes an arg `setup_environment` that defaults to False).

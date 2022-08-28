@@ -1,11 +1,18 @@
 import os
 import random
 import time
+from pathlib import Path
 from types import SimpleNamespace
 
 from modelling import get_output_folder
 
 __all__ = [
+    "this_repo",
+    "local_pkgs",
+    "local_deforum_sd",
+    "models_path",
+    "output_path",
+    "batch_name",
     "make_models_and_output_dirs",
     "resize_side",
     "process_args",
@@ -13,10 +20,17 @@ __all__ = [
     "general_args",
 ]
 
+this_repo = Path(__file__).parents[2]
+assert (this_repo / ".git").exists(), f"The path {this_repo=} is not a git repo"
+# Note: the latent-diffusion dir is the deforum/stable-diffusion repo installed in
+# editable mode, where it gets renamed to the egg name ("latent-diffusion")
+local_pkgs = this_repo / "src"
+local_deforum_sd = local_pkgs / "latent-diffusion"
+assert local_deforum_sd.exists(), f"No clone of deforum SD at {local_deforum_sd=}"
 
+models_path = this_repo / "content" / "models"
+output_path = this_repo / "content" / "output"
 batch_name = "StableFun"
-models_path = "./content/models"
-output_path = "./content/output"
 
 
 def make_models_and_output_dirs():

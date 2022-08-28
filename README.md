@@ -22,6 +22,8 @@ The notebook has been split into the following parts:
 See `CONDA_SETUP.md` file indicating prerequisites to run and the reasoning behind installing them this way
 
 ```sh
+git clone https://github.com/lmmx/deforum-stable-diffusion
+cd deforum-stable-diffusion
 conda create -n deforum
 conda activate deforum
 conda install -y pytorch torchvision torchaudio torchtext cudatoolkit=11.6 pytorch-lightning -c pytorch -c conda-forge

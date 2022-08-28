@@ -6,7 +6,12 @@ from omegaconf import OmegaConf
 from anim_config import anim_args, process_anim_args
 from env_config import report_env
 from general_config import general_args as args
-from general_config import make_models_and_output_dirs, models_path, process_args
+from general_config import (
+    local_deforum_sd,
+    make_models_and_output_dirs,
+    models_path,
+    process_args,
+)
 from model_hash import check_model_hash
 from model_loader import load_model_from_config
 from rendering import device, run_render
@@ -23,16 +28,16 @@ def main(
     custom_config_path="",
     custom_checkpoint_path="",
 ):
-    report_env(setup_environment=False)
+    report_env()
     print("Local Path Variables:\n")
     make_models_and_output_dirs()
-    base_dir = "./stable-diffusion/configs/stable-diffusion"
+    sd_config_dir = local_deforum_sd / "configs" / "stable-diffusion"
     # config path
     if os.path.exists(model_config_path := (models_path + "/" + model_config)):
         print(f"{model_config_path=} exists")
     else:
-        print(f"cp {base_dir}/{model_config} $models_path/.")
-        shutil.copy(f"{base_dir}/{model_config}", models_path)
+        print(f"cp {sd_config_dir}/{model_config} $models_path/.")
+        shutil.copy(f"{sd_config_dir}/{model_config}", models_path)
     # checkpoint path or download
     if os.path.exists(model_ckpt_path := (models_path + "/" + model_checkpoint)):
         print(f"{model_ckpt_path=} exists")
