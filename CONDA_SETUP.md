@@ -50,7 +50,7 @@ cd deforum-stable-diffusion
 conda create -n deforum
 conda activate deforum
 conda install -y pytorch torchvision torchaudio torchtext cudatoolkit=11.6 pytorch-lightning -c pytorch -c conda-forge
-pip install accelerate einops ftfy jsonmerge kornia omegaconf resize-right torchdiffeq torchmetrics transformers
+pip install accelerate einops ftfy jsonmerge kornia omegaconf opencv-python resize-right torchdiffeq torchmetrics transformers
 pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
 pip install -e git+https://github.com/deforum/stable-diffusion@main#egg=latent-diffusion
 pip install -e git+https://github.com/deforum/k-diffusion@master#egg=k-diffusion
