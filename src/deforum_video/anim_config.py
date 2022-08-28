@@ -2,9 +2,11 @@ from types import SimpleNamespace
 
 __all__ = ["process_anim_args", "DeforumAnimArgs", "anim_args"]
 
+
 def process_anim_args(anim_args):
     if anim_args.animation_mode == "None":
         anim_args.max_frames = 1
+
 
 DeforumAnimArgs = dict(
     # Animation

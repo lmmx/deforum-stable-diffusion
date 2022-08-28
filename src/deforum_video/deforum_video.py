@@ -1,9 +1,6 @@
 import os
-import random
 import shutil
-import time
 
-import torch
 from omegaconf import OmegaConf
 
 from anim_config import anim_args, process_anim_args
@@ -53,5 +50,7 @@ def main(
     model = model.to(device)
     process_anim_args(anim_args=anim_args)
     process_args(args=args, anim_args=anim_args)
-    run_render(args=args, anim_args=anim_args, model=model, skip_video=skip_video)
+    run_render(
+        args=args, anim_args=anim_args, model=model, skip_video=skip_video, fps=fps
+    )
     return

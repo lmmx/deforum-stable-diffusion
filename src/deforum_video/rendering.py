@@ -19,6 +19,7 @@ from modelling import (
 )
 from prompts import animation_prompts, prompts
 from seeding import next_seed
+from video_gen import generate_video
 
 __all__ = [
     "device",
@@ -185,7 +186,7 @@ def render_input_video(args, anim_args, model):
     render_animation(args=args, anim_args=anim_args, model=model)
 
 
-def run_render(args, anim_args, model, skip_video):
+def run_render(args, anim_args, model, skip_video, fps):
     if anim_args.animation_mode == "2D":
         render_animation(args=args, anim_args=anim_args, model=model)
     elif anim_args.animation_mode == "Video Input":
