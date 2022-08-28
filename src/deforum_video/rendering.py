@@ -20,7 +20,13 @@ from modelling import (
 from prompts import animation_prompts, prompts
 from seeding import next_seed
 
-__all__ = ["device", "render_image_batch", "render_animation", "render_input_video"]
+__all__ = [
+    "device",
+    "render_image_batch",
+    "render_animation",
+    "render_input_video",
+    "run_render",
+]
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
@@ -177,3 +183,16 @@ def render_input_video(args, anim_args, model):
         f"Loading {anim_args.max_frames} input frames from {video_in_frame_path} and saving video frames to {args.outdir}"
     )
     render_animation(args=args, anim_args=anim_args, model=model)
+
+
+def run_render(args, anim_args, model, skip_video):
+    if anim_args.animation_mode == "2D":
+        render_animation(args=args, anim_args=anim_args, model=model)
+    elif anim_args.animation_mode == "Video Input":
+        render_input_video(args=args, anim_args=anim_args, model=model)
+    else:
+        render_image_batch(args=args, model=model)
+    if skip_video:
+        print("Skipping video creation, uncheck skip_video if you want to run it")
+    else:
+        generate_video(args=args, anim_args=anim_args, fps=fps)
