@@ -7,7 +7,6 @@ import cv2
 import numpy as np
 import pandas as pd
 import torch
-from IPython import display
 
 from animation import get_inbetweens, make_xform_2d, parse_key_frames
 from modelling import (
@@ -147,8 +146,8 @@ def render_animation(args, anim_args, model):
         image.save(os.path.join(args.outdir, filename))
         if not using_vid_init:
             prev_sample = sample
-        display.clear_output(wait=True)
-        display.display(image)
+        # display.clear_output(wait=True)
+        # display.display(image)
         args.seed = next_seed(args)
 
 

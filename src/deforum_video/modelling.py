@@ -1,6 +1,7 @@
 import os
 import time
 from contextlib import nullcontext
+from pathlib import Path
 
 import cv2
 import numpy as np
@@ -59,7 +60,7 @@ def add_noise(sample: torch.Tensor, noise_amt: float):
 
 def get_output_folder(output_path, batch_folder=None):
     yearMonth = time.strftime("%Y-%m/")
-    out_path = output_path + "/" + yearMonth
+    out_path = str(Path(output_path) / yearMonth)
     if batch_folder != "":
         out_path += batch_folder
         if out_path[-1] != "/":
