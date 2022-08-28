@@ -23,6 +23,7 @@ def generate_video(args, anim_args, fps):
         *"-pix_fmt yuv420p -crf 17 -preset veryfast".split(),
         mp4_path,
     ]
+    print(" ".join(cmd))
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
     if process.returncode != 0:

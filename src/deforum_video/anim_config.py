@@ -1,5 +1,7 @@
 from types import SimpleNamespace
 
+from general_config import input_path
+
 __all__ = ["process_anim_args", "DeforumAnimArgs", "anim_args"]
 
 
@@ -10,8 +12,8 @@ def process_anim_args(anim_args):
 
 DeforumAnimArgs = dict(
     # Animation
-    animation_mode="None",  # @param ['None', '2D', 'Video Input'] {type:'string'}
-    max_frames=1000,  # @param {type:"number"}
+    animation_mode="2D",  # @param ['None', '2D', 'Video Input'] {type:'string'}
+    max_frames=100,  # @param {type:"number"}
     border="wrap",  # @param ['wrap', 'replicate'] {type:'string'}
     # Motion Parameters
     key_frames=True,  # @param {type:"boolean"}
@@ -25,7 +27,7 @@ DeforumAnimArgs = dict(
     previous_frame_noise=0.02,  # @param {type:"number"}
     previous_frame_strength=0.65,  # @param {type:"number"}
     # Video Input
-    video_init_path="/content/video_in.mp4",  # @param {type:"string"}
+    video_init_path=str(input_path / "video_in.mp4"),  # @param {type:"string"}
     extract_nth_frame=1,  # @param {type:"number"}
 )
 

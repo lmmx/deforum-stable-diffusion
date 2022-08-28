@@ -1,4 +1,3 @@
-import os
 import random
 import time
 from pathlib import Path
@@ -12,8 +11,9 @@ __all__ = [
     "local_deforum_sd",
     "models_path",
     "output_path",
+    "input_path",
     "batch_name",
-    "make_models_and_output_dirs",
+    "make_content_dirs",
     "resize_side",
     "process_args",
     "DeforumArgs",
@@ -30,13 +30,15 @@ assert local_deforum_sd.exists(), f"No clone of deforum SD at {local_deforum_sd=
 
 models_path = this_repo / "content" / "models"
 output_path = this_repo / "content" / "output"
+input_path = this_repo / "content" / "input"
 batch_name = "StableFun"
 
 
-def make_models_and_output_dirs():
-    os.makedirs(models_path, exist_ok=True)
-    os.makedirs(output_path, exist_ok=True)
-    print(f"{models_path=}\n{output_path=}")
+def make_content_dirs():
+    models_path.mkdir(exist_ok=True)
+    input_path.mkdir(exist_ok=True)
+    output_path.mkdir(exist_ok=True)
+    print(f"{models_path=}\n{input_path=}\n{output_path=}")
 
 
 def resize_side(side):

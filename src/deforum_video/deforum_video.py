@@ -8,7 +8,7 @@ from env_config import report_env
 from general_config import general_args as args
 from general_config import (
     local_deforum_sd,
-    make_models_and_output_dirs,
+    make_content_dirs,
     models_path,
     process_args,
 )
@@ -20,7 +20,7 @@ __all__ = ["main"]
 
 
 def main(
-    skip_video=True,
+    skip_video=False,
     fps=12,
     check_sha256=True,
     model_config="v1-inference.yaml",
@@ -30,7 +30,7 @@ def main(
 ):
     report_env()
     print("Local Path Variables:\n")
-    make_models_and_output_dirs()
+    make_content_dirs()
     sd_config_dir = local_deforum_sd / "configs" / "stable-diffusion"
     # config path
     if (model_config_path := (models_path / model_config)).exists():

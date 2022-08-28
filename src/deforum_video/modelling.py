@@ -1,4 +1,3 @@
-import os
 import time
 from contextlib import nullcontext
 from pathlib import Path
@@ -65,7 +64,7 @@ def get_output_folder(output_path, batch_folder=None):
         out_path += batch_folder
         if out_path[-1] != "/":
             out_path += "/"
-    os.makedirs(out_path, exist_ok=True)
+    Path(out_path).mkdir(exist_ok=True)
     return out_path
 
 
@@ -130,7 +129,7 @@ def make_callback(sampler, dynamic_threshold=None, static_threshold=None):
 
 def generate(args, model, return_latent=False, return_sample=False):
     seed_everything(args.seed)
-    os.makedirs(args.outdir, exist_ok=True)
+    Path(args.outdir).mkdir(exist_ok=True)
 
     if args.sampler == "plms":
         sampler = PLMSSampler(model)
