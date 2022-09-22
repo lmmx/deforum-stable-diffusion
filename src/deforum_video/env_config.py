@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 __all__ = ["report_env", "setup_env"]
 
@@ -20,13 +21,13 @@ def setup_env(print_subprocess=False):
     For reference only: incompatible with this library after rewriting from the
     notebook. Follow the guide in `CONDA_SETUP.md`
     """
-    print("...setting up environment")
+    print("Setting up environment...")
+    start_time = time.time()
     all_process = [
         [
             *"pip install".split(),
             "torch==1.11.0+cu113",
             "torchvision==0.12.0+cu113",
-            "torchaudio==0.11.0",
             "--extra-index-url",
             "https://download.pytorch.org/whl/cu113",
         ],
@@ -51,8 +52,11 @@ def setup_env(print_subprocess=False):
         ],
         [
             *"pip install".split(),
-            *"accelerate ftfy jsonmerge resize-right torchdiffeq".split(),
+            *"accelerate ftfy jsonmerge matplotlib resize-right timm torchdiffeq".split(),
         ],
+        "git clone https://github.com/shariqfarooq123/AdaBins.git".split(),
+        "git clone https://github.com/isl-org/MiDaS.git".split(),
+        "git clone https://github.com/MSFTserver/pytorch3d-lite.git".split(),
     ]
     for process in all_process:
         running = subprocess.run(process, capture_output=True).stdout.decode()
@@ -67,3 +71,6 @@ def setup_env(print_subprocess=False):
     )
     with open("k-diffusion/k_diffusion/__init__.py", "w") as f:
         f.write("")
+
+    end_time = time.time()
+    print(f"Environment set up in {end_time-start_time:.0f} seconds")
