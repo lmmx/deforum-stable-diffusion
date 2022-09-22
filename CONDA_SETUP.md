@@ -3,19 +3,19 @@ My original diffusers conda environment setup was:
 ```sh
 conda create -n diffusers
 conda activate diffusers
-conda install -y pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge
+conda install -y pytorch torchvision cudatoolkit=11.6 -c pytorch -c conda-forge
 pip install diffusers transformers piexif
 ```
 
 The module `env_config.py` specifies the following:
 
 ```sh
-pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
 pip install omegaconf==2.1.1 einops==0.3.0 pytorch-lightning==1.4.2 torchmetrics==0.6.0 torchtext==0.2.3 transformers==4.19.2 kornia==0.6
 git clone https://github.com/deforum/stable-diffusion
 pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
 pip install -e git+https://github.com/openai/CLIP.git@main#egg=clip
-pip install accelerate ftfy jsonmerge resize-right torchdiffeq
+pip install accelerate ftfy jsonmerge matplotlib resize-right timm torchdiffeq
 git clone https://github.com/deforum/k-diffusion/
 echo > k-diffusion/k_diffusion/__init__.py
 ```
@@ -49,11 +49,11 @@ git clone https://github.com/lmmx/deforum-stable-diffusion
 cd deforum-stable-diffusion
 conda create -n deforum
 conda activate deforum
-conda install -y pytorch torchvision torchaudio torchtext cudatoolkit=11.6 pytorch-lightning -c pytorch -c conda-forge
-pip install accelerate einops ftfy jsonmerge kornia omegaconf opencv-python resize-right torchdiffeq torchmetrics transformers
+conda install -y pytorch torchvision torchtext cudatoolkit=11.6 pytorch-lightning -c pytorch -c conda-forge
+pip install accelerate einops ftfy jsonmerge matplotlib kornia omegaconf opencv-python resize-right timm torchdiffeq torchmetrics transformers
 pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
-pip install -e git+https://github.com/deforum/stable-diffusion@main#egg=latent-diffusion
-pip install -e git+https://github.com/deforum/k-diffusion@master#egg=k-diffusion
+pip install -e git+https://github.com/deforum/stable-diffusion.git@main#egg=latent-diffusion
+pip install -e git+https://github.com/deforum/k-diffusion.git@master#egg=k-diffusion
 ```
 
 - Note that it's important to `cd` into the package after you clone it so that `pip install -e git+https://...`
